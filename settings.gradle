@@ -1,1 +1,1 @@
-include ':app', ':sw_screenadapt', ':jrtt_screenadapt'
+include ':app', ':sw_screenadapt', ':jrtt_screenadapt', ':recyclerview'

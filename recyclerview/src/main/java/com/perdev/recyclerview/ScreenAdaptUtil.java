@@ -1,4 +1,4 @@
-package com.perdev.jrtt_screenadapt;
+package com.perdev.recyclerview;
 
 import android.app.Activity;
 import android.app.Application;
@@ -64,13 +64,12 @@ public class ScreenAdaptUtil {
         activityDisplayMetrics.scaledDensity = targetScaledDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
 
+        d("");
 
-        DisplayMetrics systemDisplayMetrics = Resources.getSystem().getDisplayMetrics();
+        DisplayMetrics systemDisplayMetrics =Resources.getSystem().getDisplayMetrics();
         systemDisplayMetrics.density = targetDensity;
         systemDisplayMetrics.scaledDensity = targetScaledDensity;
         systemDisplayMetrics.densityDpi = targetDensityDpi;
-
-        d("");
     }
 
 }
