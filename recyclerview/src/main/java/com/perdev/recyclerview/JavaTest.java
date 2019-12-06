@@ -1,5 +1,8 @@
 package com.perdev.recyclerview;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,5 +27,10 @@ public class JavaTest {
                 return null;
             }
         };
+    }
+
+    private static String g(){
+
+        return "";
     }
 }
