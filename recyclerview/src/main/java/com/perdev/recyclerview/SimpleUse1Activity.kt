@@ -30,9 +30,9 @@ class SimpleUse1Activity : AppCompatActivity() {
         adapter.setItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Any, position: Int) {
                 Toast.makeText(
-                    this@SimpleUse1Activity,
-                    "item click p = $position",
-                    Toast.LENGTH_LONG
+                        this@SimpleUse1Activity,
+                        "item click p = $position",
+                        Toast.LENGTH_LONG
                 ).show()
             }
 
@@ -40,14 +40,19 @@ class SimpleUse1Activity : AppCompatActivity() {
         adapter.setItemLongClickListener(object : OnItemLongClickListener {
             override fun onItemLongClick(obj: Any, position: Int) {
                 Toast.makeText(
-                    this@SimpleUse1Activity,
-                    "item longClick p = $position",
-                    Toast.LENGTH_LONG
+                        this@SimpleUse1Activity,
+                        "item longClick p = $position",
+                        Toast.LENGTH_LONG
                 ).show()
             }
         })
         rv_asu1.layoutManager = LinearLayoutManager(this)
         rv_asu1.adapter = adapter
+
+
+        tv_asu1_top.setOnClickListener {
+            rv_asu1.scrollToPosition(0)
+        }
     }
 
 
@@ -55,16 +60,31 @@ class SimpleUse1Activity : AppCompatActivity() {
      * 为了方便查看，把类都写在了一起，实际项目中不推荐这么做
      * */
     class Simple1Adapter(
-        var mContext: Context, var mData: ArrayList<UserBean>
+            var mContext: Context, var mData: ArrayList<UserBean>
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+        companion object {
+            const val GENDER_FEMALE = 0
+            const val GENDER_MALE = 1
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return if (mData[position].gender) {
+                GENDER_MALE
+            } else {
+                GENDER_FEMALE
+            }
+        }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             L.d("66yt7", "onCreateViewHolder p = $viewType")
-            val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1, null)
-
-//            view.setOnLongClickListener { false }
-
-            return MyVH1(view)
+            return if (viewType == GENDER_FEMALE) {
+                val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1_female, null)
+                MyVH1(view)
+            } else {
+                val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1, null)
+                MyVH1(view)
+            }
         }
 
         override fun getItemCount(): Int {
@@ -104,7 +124,7 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
 
         fun setItemLongClickListener(listener: OnItemLongClickListener) {
-            mItemLongClickListener = listener;
+            mItemLongClickListener = listener
         }
 
     }
@@ -125,6 +145,15 @@ class SimpleUse1Activity : AppCompatActivity() {
         companion object {
             fun defData(): ArrayList<UserBean> {
                 val res = ArrayList<UserBean>()
+                res.add(UserBean("Amy", 13, false))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Don", 11))
+
+                res.add(UserBean("Amy", 13, false))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Don", 11))
                 res.add(UserBean("Amy", 13, false))
                 res.add(UserBean("Bob", 10))
                 res.add(UserBean("Candy", 9, false))
