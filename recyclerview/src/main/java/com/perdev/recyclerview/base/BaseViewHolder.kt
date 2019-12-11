@@ -12,12 +12,28 @@ import android.widget.TextView
  * About      类描述：
  */
 abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun <T : View> getViewById(id: Int): T? {
+    fun <T : View> findViewById(id: Int): T? {
         return itemView.findViewById(id)
     }
 
-    //可以扩展其他类似的方法
     fun setTextViewText(id: Int, text: String) {
-        getViewById<TextView>(id)!!.text = text
+        val textView = findViewById<TextView>(id)
+        //通过getViewById获得view后，判空，防止空指针导致崩溃
+        if (textView != null) {
+            textView.text = text
+        }
     }
+
+    fun setViewClickListener(id: Int, listener: View.OnClickListener) {
+        val view = findViewById<View>(id)
+        view?.setOnClickListener { v -> listener.onClick(v) }
+    }
+
+    fun setViewVisibility(id: Int, visibility: Boolean) {
+        val view = findViewById<View>(id)
+        view?.visibility = if (visibility) View.VISIBLE else View.GONE
+    }
+
+    // todo 可以扩展其他类似的方法
+
 }

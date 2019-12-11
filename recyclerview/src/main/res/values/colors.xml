@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="pink">#ffc0cb</color>
+    <color name="grey">#333333</color>
+    <color name="grey_sim">#999999</color>
 </resources>

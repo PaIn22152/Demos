@@ -1,6 +1,7 @@
 package com.perdev.recyclerview.base
 
 import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 
 /**
  * Project    demos-git
@@ -10,6 +11,9 @@ import android.support.v7.widget.RecyclerView
  * About      类描述：
  */
 abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+
+    private var mItemClickListener: OnItemClickListener? = null
+    private var mItemLongClickListener: OnItemLongClickListener? = null
 
     override fun onBindViewHolder(viewholer: BaseViewHolder, position: Int) {
         if (mItemClickListener != null) {
@@ -24,8 +28,6 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() 
         }
     }
 
-    private var mItemClickListener: OnItemClickListener? = null
-    private var mItemLongClickListener: OnItemLongClickListener? = null
     fun setItemClickListener(listener: OnItemClickListener) {
         mItemClickListener = listener
     }

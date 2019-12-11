@@ -4,6 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +33,6 @@ class SimpleUse1Activity : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 L.d("66yt7", "item click p = $position")
             }
-
         })
         adapter.setItemLongClickListener(object : BaseRecyclerViewAdapter.OnItemLongClickListener {
             override fun onItemLongClick(position: Int): Boolean {
@@ -40,8 +42,10 @@ class SimpleUse1Activity : AppCompatActivity() {
         })
         rv_asu1.adapter = adapter
 
-//        rv_asu1.layoutManager = LinearLayoutManager(this)
-        val gridLayoutManager = GridLayoutManager(this, 3)
+
+//        rv_asu1.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        val gridLayoutManager = GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 //当itemType为GENDER_FEMALE时，一个item占用三个位置
@@ -53,7 +57,15 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
         rv_asu1.layoutManager = gridLayoutManager
 
+        rv_asu1.layoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
 
+
+    }
+
+    companion object {
+        fun d(s: String) {
+            L.d("su1aTag", s)
+        }
     }
 
 
@@ -70,6 +82,7 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
 
         override fun getItemViewType(position: Int): Int {
+            d(" getItemViewType ")
             return if (mData[position].gender) {
                 GENDER_MALE
             } else {
@@ -78,6 +91,7 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+            d(" onCreateViewHolder ")
             return if (viewType == GENDER_FEMALE) {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1_female, null)
                 MyVH1Female(view)
@@ -88,11 +102,13 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int {
+            d(" getItemCount ")
             return mData.size
         }
 
 
         override fun onBindViewHolder(viewholer: BaseViewHolder, position: Int) {
+            d(" onBindViewHolder ")
             super.onBindViewHolder(viewholer, position)
             if (viewholer is MyVH1 || viewholer is MyVH1Female) {
                 val strName = "姓名:" + mData[position].name
@@ -102,9 +118,10 @@ class SimpleUse1Activity : AppCompatActivity() {
                 viewholer.setTextViewText(R.id.tv_is1_age, strAge)
             }
             if (viewholer is MyVH1) {
-                viewholer.getViewById<TextView>(R.id.tv_is1_test)!!.setOnClickListener {
-                    L.d("66yt7", " click test p = $position")
-                }
+                viewholer.setViewClickListener(R.id.tv_is1_test,
+                        View.OnClickListener { v ->
+                            L.d("66yt7", " click test p = $position  ; view = $v")
+                        })
             }
         }
 
