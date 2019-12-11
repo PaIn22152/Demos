@@ -2,6 +2,7 @@ package com.perdev.recyclerview.base
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.TextView
 
 /**
  * Project    demos-git
@@ -13,5 +14,10 @@ import android.view.View
 abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun <T : View> getViewById(id: Int): T? {
         return itemView.findViewById(id)
+    }
+
+    //可以扩展其他类似的方法
+    fun setTextViewText(id: Int, text: String) {
+        getViewById<TextView>(id)!!.text = text
     }
 }

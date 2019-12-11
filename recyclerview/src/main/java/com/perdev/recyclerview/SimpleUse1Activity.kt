@@ -3,13 +3,12 @@ package com.perdev.recyclerview
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import com.perdev.recyclerview.base.BaseRecyclerViewAdapter
 import com.perdev.recyclerview.base.BaseViewHolder
 import com.perdev.utilslib.L
 import kotlinx.android.synthetic.main.activity_simple_use1.*
@@ -27,32 +26,34 @@ class SimpleUse1Activity : AppCompatActivity() {
         data.addAll(UserBean.defData())
 
         val adapter = Simple1Adapter(this, data)
-        adapter.setItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(obj: Any, position: Int) {
-                Toast.makeText(
-                        this@SimpleUse1Activity,
-                        "item click p = $position",
-                        Toast.LENGTH_LONG
-                ).show()
+        adapter.setItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                L.d("66yt7", "item click p = $position")
             }
 
         })
-        adapter.setItemLongClickListener(object : OnItemLongClickListener {
-            override fun onItemLongClick(obj: Any, position: Int) {
-                Toast.makeText(
-                        this@SimpleUse1Activity,
-                        "item longClick p = $position",
-                        Toast.LENGTH_LONG
-                ).show()
+        adapter.setItemLongClickListener(object : BaseRecyclerViewAdapter.OnItemLongClickListener {
+            override fun onItemLongClick(position: Int): Boolean {
+                L.d("66yt7", "item longClick p = $position")
+                return true
             }
         })
-        rv_asu1.layoutManager = LinearLayoutManager(this)
         rv_asu1.adapter = adapter
 
-
-        tv_asu1_top.setOnClickListener {
-            rv_asu1.scrollToPosition(0)
+//        rv_asu1.layoutManager = LinearLayoutManager(this)
+        val gridLayoutManager = GridLayoutManager(this, 3)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                //当itemType为GENDER_FEMALE时，一个item占用三个位置
+                if (adapter.getItemViewType(position) == Simple1Adapter.GENDER_FEMALE) {
+                    return gridLayoutManager.spanCount
+                }
+                return 1
+            }
         }
+        rv_asu1.layoutManager = gridLayoutManager
+
+
     }
 
 
@@ -61,7 +62,7 @@ class SimpleUse1Activity : AppCompatActivity() {
      * */
     class Simple1Adapter(
             var mContext: Context, var mData: ArrayList<UserBean>
-    ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    ) : BaseRecyclerViewAdapter() {
 
         companion object {
             const val GENDER_FEMALE = 0
@@ -76,11 +77,10 @@ class SimpleUse1Activity : AppCompatActivity() {
             }
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            L.d("66yt7", "onCreateViewHolder p = $viewType")
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
             return if (viewType == GENDER_FEMALE) {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1_female, null)
-                MyVH1(view)
+                MyVH1Female(view)
             } else {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.item_simple_1, null)
                 MyVH1(view)
@@ -91,53 +91,29 @@ class SimpleUse1Activity : AppCompatActivity() {
             return mData.size
         }
 
-        override fun onBindViewHolder(viewholer: RecyclerView.ViewHolder, position: Int) {
-            L.d("66yt7", "onBindViewHolder p = $position")
-            if (viewholer is MyVH1) {
-                val tv_is1_name: TextView? = viewholer.getViewById(R.id.tv_is1_name)
+
+        override fun onBindViewHolder(viewholer: BaseViewHolder, position: Int) {
+            super.onBindViewHolder(viewholer, position)
+            if (viewholer is MyVH1 || viewholer is MyVH1Female) {
                 val strName = "姓名:" + mData[position].name
-                tv_is1_name?.text = strName
+                viewholer.setTextViewText(R.id.tv_is1_name, strName)
 
-                val tv_is1_age: TextView? = viewholer.getViewById(R.id.tv_is1_age)
                 val strAge = "年龄:" + mData[position].age
-                tv_is1_age?.text = strAge
-
-                if (mItemClickListener != null) {
-                    viewholer.itemView.setOnClickListener {
-                        L.d("66yt7", "item click p = $position")
-                        mItemClickListener?.onItemClick(mData[position], position)
-                    }
-                }
-                if (mItemLongClickListener != null) {
-                    viewholer.itemView.setOnLongClickListener {
-                        mItemLongClickListener?.onItemLongClick(mData[position], position)
-                        true
-                    }
+                viewholer.setTextViewText(R.id.tv_is1_age, strAge)
+            }
+            if (viewholer is MyVH1) {
+                viewholer.getViewById<TextView>(R.id.tv_is1_test)!!.setOnClickListener {
+                    L.d("66yt7", " click test p = $position")
                 }
             }
         }
 
-        private var mItemClickListener: OnItemClickListener? = null
-        private var mItemLongClickListener: OnItemLongClickListener? = null
-        fun setItemClickListener(listener: OnItemClickListener) {
-            mItemClickListener = listener
-        }
-
-        fun setItemLongClickListener(listener: OnItemLongClickListener) {
-            mItemLongClickListener = listener
-        }
 
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(obj: Any, position: Int)
-    }
-
-    interface OnItemLongClickListener {
-        fun onItemLongClick(obj: Any, position: Int)
-    }
 
     class MyVH1(itemView: View) : BaseViewHolder(itemView)
+    class MyVH1Female(itemView: View) : BaseViewHolder(itemView)
 
 
     data class UserBean(val name: String, val age: Int, val gender: Boolean = true) {
@@ -150,7 +126,21 @@ class SimpleUse1Activity : AppCompatActivity() {
                 res.add(UserBean("Candy", 9, false))
                 res.add(UserBean("Don", 11))
 
+
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Don", 11))
                 res.add(UserBean("Amy", 13, false))
+                res.add(UserBean("Bob", 10))
+                res.add(UserBean("Candy", 9, false))
+                res.add(UserBean("Don", 11))
                 res.add(UserBean("Bob", 10))
                 res.add(UserBean("Candy", 9, false))
                 res.add(UserBean("Don", 11))
