@@ -9,10 +9,6 @@ import android.util.Log
  * Author     Payne.
  * About      类描述：
  */
-class L {
-    companion object {
-        fun d(tag: String, s: String) {
-            Log.d(tag, s)
-        }
-    }
+fun d(tag: String, s: String) {
+    Log.d(tag, s)
 }

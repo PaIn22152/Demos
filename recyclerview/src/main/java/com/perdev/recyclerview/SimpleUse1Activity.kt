@@ -13,7 +13,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.perdev.recyclerview.base.BaseRecyclerViewAdapter
 import com.perdev.recyclerview.base.BaseViewHolder
-import com.perdev.utilslib.L
+import com.perdev.utilslib.d
+
 import kotlinx.android.synthetic.main.activity_simple_use1.*
 
 class SimpleUse1Activity : AppCompatActivity() {
@@ -31,12 +32,12 @@ class SimpleUse1Activity : AppCompatActivity() {
         val adapter = Simple1Adapter(this, data)
         adapter.setItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                L.d("66yt7", "item click p = $position")
+                d("66yt7", "item click p = $position")
             }
         })
         adapter.setItemLongClickListener(object : BaseRecyclerViewAdapter.OnItemLongClickListener {
             override fun onItemLongClick(position: Int): Boolean {
-                L.d("66yt7", "item longClick p = $position")
+                d("66yt7", "item longClick p = $position")
                 return true
             }
         })
@@ -64,7 +65,7 @@ class SimpleUse1Activity : AppCompatActivity() {
 
     companion object {
         fun d(s: String) {
-            L.d("su1aTag", s)
+            d("su1aTag", s)
         }
     }
 
@@ -120,7 +121,7 @@ class SimpleUse1Activity : AppCompatActivity() {
             if (viewholer is MyVH1) {
                 viewholer.setViewClickListener(R.id.tv_is1_test,
                         View.OnClickListener { v ->
-                            L.d("66yt7", " click test p = $position  ; view = $v")
+                            d("66yt7", " click test p = $position  ; view = $v")
                         })
             }
         }

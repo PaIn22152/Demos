@@ -23,13 +23,16 @@ class MainActivity : AppCompatActivity() {
         tv_am_s1.setOnClickListener {
             startActivity(Intent(this, SimpleUse1Activity::class.java))
         }
+        tv_am_d.setOnClickListener {
+            startActivity(Intent(this, DecorationActivity::class.java))
+        }
 
 //        rv_data.layoutManager = LinearLayoutManager(this)
 //        mData = ArrayList()
 //        mData.add(DataBean("title1", "author1", "content1"))
 //        mData.add(DataBean("title2", "author2", "content2"))
 //        mData.add(DataBean("title3", "author3", "content3"))
-//        mData.add(DataBean("title3", "author3", "content3"))
+//        mData.add(DataBean("title3", "author3", "content3"))getGroupFirstLine
 //        mData.add(DataBean("title3", "author3", "content3"))
 //        mData.add(DataBean("title3", "author3", "content3"))
 //        mData.add(DataBean("title3", "author3", "content3"))
