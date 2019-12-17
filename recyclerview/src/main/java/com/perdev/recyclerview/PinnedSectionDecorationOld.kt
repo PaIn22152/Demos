@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView.ItemDecoration
 import android.text.TextPaint
 import android.text.TextUtils
 import android.view.View
-import com.perdev.recyclerview.SectionDecoration.DecorationCallback
 
 
 /**
@@ -19,13 +18,18 @@ import com.perdev.recyclerview.SectionDecoration.DecorationCallback
  * Author     Payne.
  * About      类描述：
  */
-class PinnedSectionDecoration(context: Context, decorationCallback: DecorationCallback) :
+class PinnedSectionDecorationOld(context: Context, decorationCallback: DecorationCallback) :
     ItemDecoration() {
     private val callback: DecorationCallback
     private val textPaint: TextPaint
     private val paint: Paint
     private val topGap: Int
     private val fontMetrics: Paint.FontMetrics = Paint.FontMetrics()
+
+    interface DecorationCallback {
+        fun getGroupId(position: Int): Long
+        fun getGroupFirstLine(position: Int): String
+    }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)

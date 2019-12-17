@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.perdev.recyclerview.base.BaseRecyclerViewAdapter
+import com.perdev.recyclerview.base.BaseRecyclerViewAdapter1
 import com.perdev.recyclerview.base.BaseViewHolder
 import com.perdev.utilslib.d
 
@@ -29,13 +27,13 @@ class SimpleUse1Activity : AppCompatActivity() {
         val data: ArrayList<UserBean> = ArrayList()
         data.addAll(UserBean.defData())
 
-        val adapter = Simple1Adapter(this, data)
-        adapter.setItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener {
+        val adapter = Simple1Adapter1(this, data)
+        adapter.setItemClickListener(object : BaseRecyclerViewAdapter1.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 d("66yt7", "item click p = $position")
             }
         })
-        adapter.setItemLongClickListener(object : BaseRecyclerViewAdapter.OnItemLongClickListener {
+        adapter.setItemLongClickListener(object : BaseRecyclerViewAdapter1.OnItemLongClickListener {
             override fun onItemLongClick(position: Int): Boolean {
                 d("66yt7", "item longClick p = $position")
                 return true
@@ -50,7 +48,7 @@ class SimpleUse1Activity : AppCompatActivity() {
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 //当itemType为GENDER_FEMALE时，一个item占用三个位置
-                if (adapter.getItemViewType(position) == Simple1Adapter.GENDER_FEMALE) {
+                if (adapter.getItemViewType(position) == Simple1Adapter1.GENDER_FEMALE) {
                     return gridLayoutManager.spanCount
                 }
                 return 1
@@ -73,9 +71,9 @@ class SimpleUse1Activity : AppCompatActivity() {
     /**
      * 为了方便查看，把类都写在了一起，实际项目中不推荐这么做
      * */
-    class Simple1Adapter(
+    class Simple1Adapter1(
             var mContext: Context, var mData: ArrayList<UserBean>
-    ) : BaseRecyclerViewAdapter() {
+    ) : BaseRecyclerViewAdapter1() {
 
         companion object {
             const val GENDER_FEMALE = 0

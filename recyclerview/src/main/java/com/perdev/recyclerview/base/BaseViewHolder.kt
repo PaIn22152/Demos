@@ -11,7 +11,7 @@ import android.widget.TextView
  * Author     Payne.
  * About      类描述：
  */
-abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun <T : View> findViewById(id: Int): T? {
         return itemView.findViewById(id)
     }
@@ -37,3 +37,4 @@ abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     // todo 可以扩展其他类似的方法
 
 }
+

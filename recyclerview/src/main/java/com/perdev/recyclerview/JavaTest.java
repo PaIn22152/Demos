@@ -19,19 +19,18 @@ import java.util.List;
  */
 public class JavaTest {
 
-    private static void test() {
-        SectionDecoration.DecorationCallback callback = new SectionDecoration.DecorationCallback() {
-            @Override
-            public long getGroupId(int position) {
-                return 0;
-            }
+    private static void test(int i) {
+        switch (i) {
+            case 0:
 
-            @NotNull
-            @Override
-            public String getGroupFirstLine(int position) {
-                return null;
-            }
-        };
+                break;
+            case 1:
+
+                break;
+            default:
+
+                break;
+        }
 
 
     }

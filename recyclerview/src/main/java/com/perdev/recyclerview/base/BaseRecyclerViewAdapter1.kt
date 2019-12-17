@@ -10,7 +10,7 @@ import android.view.ViewGroup
  * Author     Payne.
  * About      类描述：
  */
-abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRecyclerViewAdapter1 : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var mItemClickListener: OnItemClickListener? = null
     private var mItemLongClickListener: OnItemLongClickListener? = null
