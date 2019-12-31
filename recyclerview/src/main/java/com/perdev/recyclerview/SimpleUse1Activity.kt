@@ -25,7 +25,7 @@ class SimpleUse1Activity : AppCompatActivity() {
         setContentView(R.layout.activity_simple_use1)
 
         val data: ArrayList<UserBean> = ArrayList()
-        data.addAll(UserBean.defData())
+        data.addAll(defData())
 
         val adapter = Simple1Adapter1(this, data)
         adapter.setItemClickListener(object : BaseRecyclerViewAdapter1.OnItemClickListener {
@@ -132,40 +132,37 @@ class SimpleUse1Activity : AppCompatActivity() {
     class MyVH1Female(itemView: View) : BaseViewHolder(itemView)
 
 
-    data class UserBean(val name: String, val age: Int, val gender: Boolean = true) {
-        //伴生对象
-        companion object {
-            fun defData(): ArrayList<UserBean> {
-                val res = ArrayList<UserBean>()
-                res.add(UserBean("Amy", 13, false))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Don", 11))
+    data class UserBean(val name: String, val age: Int, val gender: Boolean = true)
+
+    fun defData(): ArrayList<UserBean> {
+        val res = ArrayList<UserBean>()
+        res.add(UserBean("Amy", 13, false))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Don", 11))
 
 
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Don", 11))
-                res.add(UserBean("Amy", 13, false))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Don", 11))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Don", 11))
-                res.add(UserBean("Amy", 13, false))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Candy", 9, false))
-                res.add(UserBean("Don", 11))
-                return res
-            }
-        }
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Don", 11))
+        res.add(UserBean("Amy", 13, false))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Don", 11))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Don", 11))
+        res.add(UserBean("Amy", 13, false))
+        res.add(UserBean("Bob", 10))
+        res.add(UserBean("Candy", 9, false))
+        res.add(UserBean("Don", 11))
+        return res
     }
 }

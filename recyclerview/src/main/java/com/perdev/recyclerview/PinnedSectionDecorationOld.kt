@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView.ItemDecoration
 import android.text.TextPaint
 import android.text.TextUtils
 import android.view.View
+import com.perdev.utilslib.d
+import com.perdev.utilslib.dp2px
 
 
 /**
@@ -36,24 +38,28 @@ class PinnedSectionDecorationOld(context: Context, decorationCallback: Decoratio
         val pos = parent.getChildAdapterPosition(view)
         val groupId = callback.getGroupId(pos)
         if (groupId < 0) return
-        if (pos == 0 || isFirstInGroup(pos)) {
+        if (isFirstInGroup(pos)) {
             outRect.top = topGap
-        } else {
-            outRect.top = 0
         }
+
+//        else {
+//            outRect.top = 0
+//        }
     }
 
+    fun d(s:String){
+        d("67gnd",s)
+    }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-//    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         val itemCount = state.itemCount
         val childCount = parent.childCount
         val left = parent.paddingLeft.toFloat()
         val right = parent.width - parent.paddingRight.toFloat()
-        val lineHeight: Float = textPaint.textSize + fontMetrics.descent
         var preGroupId: Long
         var groupId: Long = -1
+        d("childCount = $childCount")
         for (i in 0 until childCount) {
             val view: View = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(view)
@@ -70,8 +76,10 @@ class PinnedSectionDecorationOld(context: Context, decorationCallback: Decoratio
                     textY = viewBottom.toFloat()
                 }
             }
+            paint.color=paint.color+i
+            d("drawRect")
             c.drawRect(left, textY - topGap, right, textY, paint)
-            c.drawText(textLine, left, textY, textPaint)
+//            c.drawText(textLine, left, textY, textPaint)
         }
     }
 
@@ -106,6 +114,7 @@ class PinnedSectionDecorationOld(context: Context, decorationCallback: Decoratio
         textPaint.getFontMetrics(fontMetrics)
         textPaint.textAlign = Paint.Align.LEFT
 
-        topGap = res.getDimensionPixelSize(R.dimen.sectioned_top)
+//        topGap = res.getDimensionPixelSize(R.dimen.sectioned_top)
+        topGap = dp2px(50f)
     }
 }

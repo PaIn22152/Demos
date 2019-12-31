@@ -35,7 +35,7 @@ class HeaderFooterActivity : AppCompatActivity() {
             val context: Context, @LayoutRes val layoutId: Int, val data: List<UserBean>
     ) : BaseRecyclerViewAdapter2<UserBean, BaseViewHolder>(context, layoutId, data) {
         override fun convert(holder: BaseViewHolder, position: Int, item: UserBean) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+           holder.setTextViewText(R.id.tv_ih_name,item.name)
         }
 
     }

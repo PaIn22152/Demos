@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         tv_am_d.setOnClickListener {
             startActivity(Intent(this, DecorationActivity::class.java))
         }
+        tv_am_hf.setOnClickListener {
+            startActivity(Intent(this, HeaderFooterActivity::class.java))
+        }
 
 //        rv_data.layoutManager = LinearLayoutManager(this)
 //        mData = ArrayList()

@@ -5,8 +5,10 @@ import android.graphics.*
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.ItemDecoration
 import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
@@ -35,12 +37,16 @@ class DecorationActivity : AppCompatActivity() {
         val adapter = Decoration1Adapter1(this, mData)
         rv_ad.adapter = adapter
 
+
         rv_ad.layoutManager = LinearLayoutManager(this)
+//        rv_ad.layoutManager = GridLayoutManager(this, 3)
 
-//        val header = LayoutInflater.from(this).inflate(R.layout.view_header, null)
-//        rv_ad.addItemDecoration(HeaderDecoration(this, header))
 
-//        rv_ad.addItemDecoration(SimpleLineDecoration(this, mRightPadding = dp2px(50f)))
+//        rv_ad.addItemDecoration(SimpleLineDecoration(this,
+//                mRightPadding = dp2px(150f),
+//                mLeftPadding = dp2px(150f)))
+
+//        rv_ad.addItemDecoration(GridDecoration(this, 3))
 
 //        rv_ad.addItemDecoration(TagDecoration(this, object : TagDecoration.TagCallback {
 //            override fun tag(pos: Int): Int {
@@ -63,16 +69,6 @@ class DecorationActivity : AppCompatActivity() {
 //
 //        }))
 
-//        rv_ad.addItemDecoration(PinnedSectionDecorationOld(this, object : PinnedSectionDecorationOld.DecorationCallback {
-//            override fun getGroupId(position: Int): Long {
-//                return Character.toUpperCase(mData[position].name.toCharArray()[0]).toLong()
-//            }
-//
-//            override fun getGroupFirstLine(position: Int): String {
-//                return mData[position].name.substring(0, 1).toUpperCase()
-//            }
-//
-//        }))
 
         rv_ad.addItemDecoration(PinnedSectionDecoration(object : PinnedSectionDecoration.Callback {
             override fun getGroupId(position: Int): Int {
@@ -88,12 +84,81 @@ class DecorationActivity : AppCompatActivity() {
 
     companion object {
         fun d(s: String) {
-            d("da740", s)
+            d("67gnd", s)
         }
     }
 
+
+    //GridLayoutManager，在每个item之间画一条线，最又边和最下边不画
+    class GridDecoration(mContext: Context, val spanCount: Int) : ItemDecoration() {
+
+        private var line: Int = mContext.resources.getDimensionPixelSize(R.dimen.divider_height)
+        private val paint: Paint = Paint()
+
+        init {
+            paint.color = Color.BLACK
+        }
+
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            super.getItemOffsets(outRect, view, parent, state)
+            val totalCount = state.itemCount
+            val pos = parent.childCount - 1
+            d("getItemOffsets  pos = $pos   totalCount = $totalCount")
+            if (drawBottom(pos, totalCount)) {
+                outRect.bottom = line
+            }
+
+            if (drawRight(pos)) {
+                outRect.right = line
+            }
+
+        }
+
+        fun drawRight(pos: Int): Boolean {
+            val res = (pos + 1) % 3 != 0
+//            d("drawRight  pos = $pos   res = $res")
+            return res
+        }
+
+        //只考虑每个item都只占一个位置的情况
+        fun drawBottom(pos: Int, total: Int): Boolean {
+            var num = total % spanCount
+            num = if (num == 0) {
+                spanCount
+            } else {
+                num
+            }
+            return pos + num < total
+        }
+
+        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+            val childCount = parent.childCount
+            val totalCount = state.itemCount
+
+            for (i in 0 until childCount) {
+                val view: View = parent.getChildAt(i)
+                val pos = parent.getChildAdapterPosition(view)
+                d("onDraw  pos = $pos   totalCount = $totalCount")
+
+                if (drawBottom(pos, totalCount)) {
+                    c.drawRect(view.left.toFloat(), view.bottom.toFloat(),
+                            (view.right + line).toFloat(), (view.bottom + line).toFloat(), paint)
+                }
+
+                if (drawRight(pos)) {
+                    c.drawRect(view.right.toFloat(), view.top.toFloat(),
+                            (view.right + line).toFloat(), (view.bottom + line).toFloat(), paint)
+                }
+
+
+            }
+
+        }
+    }
+
+    //粘性头部
     //数据分组，每组数据的title固定在最上方，当下一组title滑到顶部时会顶走上一组title
-    class PinnedSectionDecoration(private val callback: Callback) : RecyclerView.ItemDecoration() {
+    class PinnedSectionDecoration(private val callback: Callback) : ItemDecoration() {
         interface Callback {
             fun getGroupId(position: Int): Int
             fun getGroupTitle(position: Int): String
@@ -101,12 +166,12 @@ class DecorationActivity : AppCompatActivity() {
 
         private val textPaint: TextPaint = TextPaint()
         private val paint: Paint = Paint()
-        private val topGap: Int = dp2px(50f)
+        private val topGap: Int = dp2px(40f)
         private val fontMetrics: Paint.FontMetrics = Paint.FontMetrics()
 
         init {
             textPaint.typeface = Typeface.DEFAULT_BOLD
-            textPaint.isAntiAlias = true
+            textPaint.isAntiAlias = true//抗锯齿
             textPaint.textSize = sp2px(20f).toFloat()
             textPaint.color = Color.BLACK
             textPaint.getFontMetrics(fontMetrics)
@@ -123,29 +188,48 @@ class DecorationActivity : AppCompatActivity() {
             }
         }
 
+
         override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
             super.onDrawOver(c, parent, state)
+            val itemCount = state.itemCount
+            val childCount = parent.childCount
             val left = parent.paddingLeft.toFloat()
-
             val right = parent.width - parent.paddingRight.toFloat()
+
+
+            var preGroupId: Int
+            var groupId: Int = -1
+            d("parent.childCount = " + parent.childCount)
             for (i in 0 until parent.childCount) {
                 val view = parent.getChildAt(i)
                 val pos = parent.getChildAdapterPosition(view)
-                if (isGroupFirst(pos)) {
-                    val top = (view.top - topGap).toFloat()
-                    val bottom = view.top.toFloat()
-                    c.drawRect(left, top, right, bottom, paint)
-                    val title = callback.getGroupTitle(pos)
-                    val strWidth = textPaint.measureText(title)//文本宽
-                    val strHeight = abs(textPaint.ascent() + textPaint.descent())//文字高度
-                    d("strWidth = $strWidth   strHeight = $strHeight")
-                    //文字上下居中
-                    c.drawText(title, left + dp2px(20f), bottom - topGap / 2 + strHeight / 2, textPaint)
-                } else {
-                    continue
+                preGroupId = groupId
+                groupId = callback.getGroupId(pos)
+                if (groupId < 0 || groupId == preGroupId) continue
+
+                d("pos = $pos")
+
+
+                val viewBottom: Int = view.bottom
+                var textY = topGap.coerceAtLeast(view.top).toFloat()
+                d("")
+                if (pos + 1 < itemCount) { //下一个和当前不一样移动当前
+                    val nextGroupId = callback.getGroupId(pos + 1)
+                    if (nextGroupId != groupId && viewBottom < textY) { //组内最后一个view进入了header
+                        textY = viewBottom.toFloat()
+                    }
                 }
+                c.drawRect(left, textY - topGap, right, textY, paint)
+
+                val title = callback.getGroupTitle(pos)
+                val strWidth = textPaint.measureText(title)//文本宽
+                val strHeight = abs(textPaint.ascent() + textPaint.descent())//文字高度
+                //文字上下居中
+                c.drawText(title, left + dp2px(20f), textY - topGap / 2 + strHeight / 2, textPaint)
+
             }
         }
+
 
         private fun isGroupFirst(pos: Int): Boolean {
             if (pos == 0) {
@@ -159,7 +243,7 @@ class DecorationActivity : AppCompatActivity() {
     }
 
     //数据分组，每组数据的第一条上方显示title
-    class SectionDecoration(private val callback: Callback) : RecyclerView.ItemDecoration() {
+    class SectionDecoration(private val callback: Callback) : ItemDecoration() {
 
         interface Callback {
             fun getGroupId(position: Int): Int
@@ -224,7 +308,7 @@ class DecorationActivity : AppCompatActivity() {
 
 
     //不同item上显示tag
-    class TagDecoration(mContext: Context, private val tagCallback: TagCallback) : RecyclerView.ItemDecoration() {
+    class TagDecoration(mContext: Context, private val tagCallback: TagCallback) : ItemDecoration() {
         interface TagCallback {
             //tag=0 不显示tag   tag<0 左边显示tag   tag>0 右边显示tag
             fun tag(pos: Int): Int
@@ -267,43 +351,11 @@ class DecorationActivity : AppCompatActivity() {
     }
 
 
-    //todo 通过Decoration实现HeaderView，待完成
-    class HeaderDecoration(mContext: Context, header: View) : RecyclerView.ItemDecoration() {
-        private val headerHeight: Int
-        private val dividerPaint: Paint
-
-        init {
-            headerHeight = header.measuredHeight
-            d(" headerHeight = $headerHeight")
-            dividerPaint = Paint()
-        }
-
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            super.getItemOffsets(outRect, view, parent, state)
-            if (parent.childCount == 0) {
-                outRect.top = headerHeight
-            }
-        }
-
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-            super.onDraw(c, parent, state)
-            if (parent.childCount == 0) {
-                val left = parent.paddingLeft.toFloat()
-                val right = parent.width - parent.paddingRight.toFloat()
-                val view: View = parent.getChildAt(0)
-                val top: Float = view.bottom.toFloat()
-                val bottom: Float = (view.bottom + headerHeight).toFloat()
-                c.drawRect(left, top, right, bottom, dividerPaint)
-
-            }
-        }
-    }
-
     //简单的分割线
     class SimpleLineDecoration(mContext: Context,
                                mLineHeight: Int = -1, mLeftPadding: Int = -1, mRightPadding: Int = -1,
                                @ColorInt mColor: Int = Color.parseColor("#33aa99"))
-        : RecyclerView.ItemDecoration() {
+        : ItemDecoration() {
         private var dividerHeight: Int = mContext.resources.getDimensionPixelSize(R.dimen.divider_height)
         private var leftMargin: Int = mContext.resources.getDimensionPixelSize(R.dimen.margin)
         private var rightMargin: Int = mContext.resources.getDimensionPixelSize(R.dimen.margin)
@@ -382,8 +434,6 @@ class DecorationActivity : AppCompatActivity() {
 
                 res.add(UserBean("Bob", 10))
                 res.add(UserBean("Bob", 10))
-                res.add(UserBean("Bob", 10))
-                res.add(UserBean("Bob", 10))
                 res.add(UserBean("Candy", 9, false))
                 res.add(UserBean("Candy", 9, false))
                 res.add(UserBean("Candy", 9, false))
@@ -401,6 +451,11 @@ class DecorationActivity : AppCompatActivity() {
                 res.add(UserBean("Bob", 10))
                 res.add(UserBean("Candy", 9, false))
                 res.add(UserBean("Don", 11))
+                res.add(UserBean("Eon", 11))
+                res.add(UserBean("Eon", 11))
+                res.add(UserBean("Fon", 11))
+                res.add(UserBean("Fon", 11))
+                res.add(UserBean("Gon", 11))
 
                 //按姓名排序
                 res.sortWith(Comparator { u1: UserBean, u2: UserBean -> u1.name.compareTo(u2.name) })
