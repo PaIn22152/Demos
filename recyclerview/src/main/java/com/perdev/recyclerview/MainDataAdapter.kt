@@ -15,11 +15,15 @@ import android.widget.TextView
  * Author     Payne.
  * About      类描述：
  */
-class MainDataAdapter(var mContext: Context, var mData: ArrayList<DataBean>) : RecyclerView.Adapter<ViewHolder>() {
+class MainDataAdapter(
+    var mContext: Context,
+    var mData: ArrayList<DataBean>
+) : RecyclerView.Adapter<ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.item_main_data, parent, false)
+        val view = LayoutInflater.from(mContext)
+            .inflate(R.layout.item_main_data, parent, false)
         return MyVH(view)
     }
 
