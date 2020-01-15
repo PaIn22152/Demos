@@ -7,11 +7,29 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/rv_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent"
+                  android:padding="20dp"
+                  android:id="@+id/tv_am_s1"
+                  android:text="RecyclerView简单使用1"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:padding="20dp"
+                  android:id="@+id/tv_am_d"
+                  android:text="RecyclerView进阶，Item分割线"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:padding="20dp"
+                  android:id="@+id/tv_am_hf"
+                  android:text="RecyclerView进阶，HeaderView，FooterView"
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
