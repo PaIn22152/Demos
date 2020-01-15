@@ -3,6 +3,7 @@ package com.perdev.recyclerview.test
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import kotlin.math.pow
 
 /**
  * Project    demos-git
@@ -26,6 +27,35 @@ class TestAdapter(mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHol
 
     override fun onBindViewHolder(viewholer: RecyclerView.ViewHolder, position: Int) {
         TODO("使用viewHolder对象，和相应的位置position，绑定数据到itemView")
+    }
+
+    fun singleNumber(nums: IntArray): Int {
+        var n = 0
+        for (i in nums) {
+            n = n xor i
+        }
+        return n
+    }
+
+    fun majorityElement(nums: IntArray): Int {
+        nums.sort()
+        return nums[nums.size / 2]
+    }
+
+    fun integerBreak(n: Int): Int {
+        if (n <= 3) {
+            return n - 1
+        }
+        val num = n / 3
+        val r = n % 3
+        if (r == 0) {
+            return Math.pow(3.toDouble(), num.toDouble()).toInt()
+        }
+        return if (r == 1) {
+            (Math.pow(3.toDouble(), num.toDouble() - 1) * 4).toInt()
+        } else {//r==2
+            (Math.pow(3.toDouble(), num.toDouble()) * 2).toInt()
+        }
     }
 
 }

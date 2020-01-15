@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ItemDecoration
+import android.support.v7.widget.RecyclerView.*
 import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
@@ -38,26 +38,27 @@ class DecorationActivity : AppCompatActivity() {
         rv_ad.adapter = adapter
 
 
-        rv_ad.layoutManager = LinearLayoutManager(this)
-//        rv_ad.layoutManager = GridLayoutManager(this, 3)
+        //test 1
+//        rv_ad.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+//        rv_ad.addItemDecoration(SimpleLineDecoration(orientation = VERTICAL,
+//                mLine = dp2px(5f),
+//                mMargin2 = dp2px(50f),
+//                mMargin1 = dp2px(10f)))
 
 
-//        rv_ad.addItemDecoration(SimpleLineDecoration(this,
-//                mRightPadding = dp2px(150f),
-//                mLeftPadding = dp2px(150f)))
-
-//        rv_ad.addItemDecoration(GridDecoration(this, 3))
-
+        //test 2
+//        rv_ad.layoutManager = LinearLayoutManager(this)
 //        rv_ad.addItemDecoration(TagDecoration(this, object : TagDecoration.TagCallback {
 //            override fun tag(pos: Int): Int {
 //                //年龄小于10的，左边显示tag
 //                //年龄等于10的，不显示tag
 //                //年龄大于10的，右边显示tag
-//                return data[pos].age - 10
+//                return mData[pos].age - 10
 //            }
 //        }))
 
-
+        //test 3
+//        rv_ad.layoutManager = LinearLayoutManager(this)
 //        rv_ad.addItemDecoration(SectionDecoration(object : SectionDecoration.Callback {
 //            override fun getGroupId(position: Int): Int {
 //                return Character.toUpperCase(mData[position].name.toCharArray()[0]).toInt()
@@ -70,16 +71,23 @@ class DecorationActivity : AppCompatActivity() {
 //        }))
 
 
-        rv_ad.addItemDecoration(PinnedSectionDecoration(object : PinnedSectionDecoration.Callback {
-            override fun getGroupId(position: Int): Int {
-                return Character.toUpperCase(mData[position].name.toCharArray()[0]).toInt()
-            }
+        //test 4
+//        rv_ad.layoutManager = LinearLayoutManager(this)
+//        rv_ad.addItemDecoration(PinnedSectionDecoration(object : PinnedSectionDecoration.Callback {
+//            override fun getGroupId(position: Int): Int {
+//                return Character.toUpperCase(mData[position].name.toCharArray()[0]).toInt()
+//            }
+//
+//            override fun getGroupTitle(position: Int): String {
+//                return mData[position].name.substring(0, 1).toUpperCase()
+//            }
+//
+//        }))
 
-            override fun getGroupTitle(position: Int): String {
-                return mData[position].name.substring(0, 1).toUpperCase()
-            }
 
-        }))
+        //test 5
+        rv_ad.layoutManager = GridLayoutManager(this, 3)
+        rv_ad.addItemDecoration(GridDecoration(this, 3))
     }
 
     companion object {
@@ -149,8 +157,6 @@ class DecorationActivity : AppCompatActivity() {
                     c.drawRect(view.right.toFloat(), view.top.toFloat(),
                             (view.right + line).toFloat(), (view.bottom + line).toFloat(), paint)
                 }
-
-
             }
 
         }
@@ -209,7 +215,6 @@ class DecorationActivity : AppCompatActivity() {
 
                 d("pos = $pos")
 
-
                 val viewBottom: Int = view.bottom
                 var textY = topGap.coerceAtLeast(view.top).toFloat()
                 d("")
@@ -266,7 +271,7 @@ class DecorationActivity : AppCompatActivity() {
             paint.color = Color.parseColor("#557799")
         }
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
             super.getItemOffsets(outRect, view, parent, state)
             val pos = parent.getChildAdapterPosition(view)
             if (isGroupFirst(pos)) {
@@ -274,7 +279,7 @@ class DecorationActivity : AppCompatActivity() {
             }
         }
 
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        override fun onDraw(c: Canvas, parent: RecyclerView, state: State) {
             super.onDraw(c, parent, state)
             val left = parent.paddingLeft.toFloat()
             val right = parent.width - parent.paddingRight.toFloat()
@@ -285,6 +290,7 @@ class DecorationActivity : AppCompatActivity() {
                     val top = (view.top - topGap).toFloat()
                     val bottom = view.top.toFloat()
                     c.drawRect(left, top, right, bottom, paint)
+
                     val title = callback.getGroupTitle(pos)
                     val strWidth = textPaint.measureText(title)//文本宽
                     val strHeight = abs(textPaint.ascent() + textPaint.descent())//文字高度
@@ -323,7 +329,7 @@ class DecorationActivity : AppCompatActivity() {
             rightPaint.color = mContext.resources.getColor(R.color.colorPrimary)
         }
 
-        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: State) {
             super.onDrawOver(c, parent, state)
             for (i in 0 until parent.childCount) {
                 val child: View = parent.getChildAt(i)
@@ -352,46 +358,53 @@ class DecorationActivity : AppCompatActivity() {
 
 
     //简单的分割线
-    class SimpleLineDecoration(mContext: Context,
-                               mLineHeight: Int = -1, mLeftPadding: Int = -1, mRightPadding: Int = -1,
-                               @ColorInt mColor: Int = Color.parseColor("#33aa99"))
+    class SimpleLineDecoration(@ColorInt mColor: Int = Color.parseColor("#33aa99"),
+                               val orientation: Int = VERTICAL, val mLine: Int = dp2px(2f),
+                               val mMargin1: Int = dp2px(30f), val mMargin2: Int = dp2px(30f))
         : ItemDecoration() {
-        private var dividerHeight: Int = mContext.resources.getDimensionPixelSize(R.dimen.divider_height)
-        private var leftMargin: Int = mContext.resources.getDimensionPixelSize(R.dimen.margin)
-        private var rightMargin: Int = mContext.resources.getDimensionPixelSize(R.dimen.margin)
+
         private val dividerPaint: Paint = Paint()
 
         init {
             dividerPaint.color = mColor
-            if (mLineHeight > 0) {
-                dividerHeight = mLineHeight
-            }
-            if (mLeftPadding > 0) {
-                leftMargin = mLeftPadding
-            }
-            if (mRightPadding > 0) {
-                rightMargin = mRightPadding
-            }
         }
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
             //除最后一个item外，其余item都在底部设置分割线
             if (state.itemCount != parent.childCount) {
-                outRect.bottom = dividerHeight
+                if (orientation == VERTICAL) {
+                    outRect.bottom = mLine
+                } else {//HORIZONTAL
+                    outRect.right = mLine
+                }
+
             }
 
         }
 
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        override fun onDraw(c: Canvas, parent: RecyclerView, state: State) {
             val childCount = parent.childCount
-            val left = (parent.paddingLeft + leftMargin).toFloat()
-            val right = (parent.width - parent.paddingRight - rightMargin).toFloat()
-            for (i in 0 until childCount - 1) {
-                val view: View = parent.getChildAt(i)
-                val top: Float = view.bottom.toFloat()
-                val bottom: Float = (view.bottom + dividerHeight).toFloat()
-                c.drawRect(left, top, right, bottom, dividerPaint)
+            if (orientation == VERTICAL) {
+                val left = (parent.paddingLeft + mMargin1).toFloat()
+                val right = (parent.width - parent.paddingRight - mMargin2).toFloat()
+                for (i in 0 until childCount - 1) {
+                    val view: View = parent.getChildAt(i)
+                    val pos = parent.getChildAdapterPosition(view)
+                    val top: Float = view.bottom.toFloat()
+                    val bottom: Float = (view.bottom + mLine).toFloat()
+                    c.drawRect(left, top, right, bottom, dividerPaint)
+                }
+            } else {//HORIZONTAL
+                val top = (parent.paddingTop + mMargin1).toFloat()
+                val bottom = (parent.height - parent.paddingBottom - mMargin2).toFloat()
+                for (i in 0 until childCount - 1) {
+                    val view: View = parent.getChildAt(i)
+                    val pos = parent.getChildAdapterPosition(view)
+                    val left: Float = view.right.toFloat()
+                    val right: Float = (view.right + mLine).toFloat()
+                    c.drawRect(left, top, right, bottom, dividerPaint)
+                }
             }
         }
     }
@@ -422,7 +435,7 @@ class DecorationActivity : AppCompatActivity() {
     class MyVHDecoration(itemView: View) : BaseViewHolder(itemView)
 
     data class UserBean(val name: String, val age: Int, val gender: Boolean = true) {
-        //伴生对象
+        //伴生对象，在内的变量和方法，等同于java中静态变量、静态方法
         companion object {
             fun defData(): ArrayList<UserBean> {
                 val res = ArrayList<UserBean>()
