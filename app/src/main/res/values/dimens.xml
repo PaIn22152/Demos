@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    项目中所有用到的值，如果使用的是今日头条适配方案，可以不需要这一步
+    不建议在xml或者代码中直接使用以下的值，而是使用项目中具体配置
+    -->
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+
+
+    <!--
+    项目中具体配置，根据用途命名
+    比如按钮高度，项目中所有按钮都使用下面的值btn_height
+    如果需要把所有按钮从50dp改为60dp，只需要改以下btn_height的值就好
+    -->
+    <dimen name="btn_height">@dimen/dp_50</dimen>
+    <dimen name="line">@dimen/dp_1</dimen>
+
+</resources>

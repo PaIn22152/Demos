@@ -1,11 +1,13 @@
 // c 代码
+#include <jni.h>
 #include <android/bitmap.h>
 #include <android/log.h>
-#include <malloc.h>
-//#include "giflib/gif_lib.h"
+#include "giflib/gif_lib.h"
 
 #define TAG "bitmaplibtag"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG ,__VA_ARGS__)
+
+
 
 
 extern "C"
@@ -62,7 +64,6 @@ Java_com_perdev_giflib_jnipackage_GifLoader_blackWhite(
 }
 
 
-/*
 extern "C"
 JNIEXPORT jlong JNICALL
 Java_com_perdev_giflib_jnipackage_GifLoader_loadGif(JNIEnv *env, jclass clazz, jstring path) {
@@ -104,8 +105,7 @@ Java_com_perdev_giflib_jnipackage_GifLoader_destroy(JNIEnv *env, jclass clazz,
                                                    jlong native_gif_file) {
     // TODO: implement destroy()
 
-    isDestroy = true;
-}*/
+}
 
 
 

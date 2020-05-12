@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+
+    <!--
+   项目中所有用到的值，根据色值命名
+   不建议在xml或者代码中直接使用以下的值，而是使用项目中具体配置
+   -->
+    <color name="red">#ffff0000</color>
+    <color name="blue">#ff00574B</color>
+    <color name="green">#ff008577</color>
+    <color name="ffD81B60">#ffD81B60</color>
+
+
+    <!--
+   项目中具体配置，根据用途命名
+   比如登录按钮颜色，使用app_btn_login
+   如果需要需要把登录按钮颜色改为其他的，修改以下app_btn_login的值
+   -->
+    <color name="colorPrimary">@color/green</color>
+    <color name="colorPrimaryDark">@color/blue</color>
+    <color name="colorAccent">@color/ffD81B60</color>
+
+
+    <color name="app_btn_login">@color/red</color>
+    <color name="app_tv_line">@color/green</color>
 </resources>

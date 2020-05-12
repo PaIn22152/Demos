@@ -12,7 +12,7 @@ import android.graphics.Bitmap;
 public class GifLoader {
 
     static {
-        System.loadLibrary("GifLoader");
+        System.loadLibrary("GifLibHandler");
     }
 
     public static native void blackWhite(Bitmap input, Bitmap output);//黑白滤镜
