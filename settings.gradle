@@ -1,1 +1,2 @@
-include ':app', ':sw_screenadapt', ':jrtt_screenadapt', ':recyclerview', ':utilslib'
+include ':app', ':sw_screenadapt', ':jrtt_screenadapt', ':recyclerview', ':utilslib', ':eventdispatch'
+include ':giflib'

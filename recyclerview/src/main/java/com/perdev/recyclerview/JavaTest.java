@@ -252,4 +252,127 @@ public class JavaTest {
     }
 
 
+    public void reverseString(char[] s) {
+        for (int i = 0; i < s.length / 2; i++) {
+            char tem = s[i];
+            s[i] = s[s.length - 1 - i];
+            s[s.length - 1 - i] = tem;
+        }
+    }
+
+
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int tem = head.val;
+        head.val = head.next.val;
+        head.next.val = tem;
+        head.next.next = swapPairs(head.next.next);
+        return head;
+    }
+
+
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> last = new ArrayList<>();
+        for (int i = 1; i <= numRows; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 1; j <= i; j++) {
+                if (j == 1 || i == j) {
+                    list.add(1);
+                } else {
+                    list.add(last.get(j - 1) + last.get(j - 2));
+                }
+
+            }
+            res.add(list);
+            last.clear();
+            last.addAll(list);
+        }
+        return res;
+
+    }
+
+
+    public List<Integer> getRow2(int rowIndex) {
+        rowIndex++;
+        List<Integer> last = new ArrayList<>();
+        for (int i = 1; i <= rowIndex; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 1; j <= i; j++) {
+                if (j == 1 || i == j) {
+                    list.add(1);
+                } else {
+                    list.add(last.get(j - 1) + last.get(j - 2));
+                }
+
+            }
+            last.clear();
+            last.addAll(list);
+        }
+        return last;
+    }
+
+
+    public List<Integer> getRow(int rowIndex) {
+        rowIndex++;
+        List<Integer> res = new ArrayList<>();
+        for (int i = 1; i <= rowIndex; i++) {
+            if (i == 1 || i == rowIndex) {
+                res.add(1);
+            } else {
+                res.add(getI(rowIndex, i));
+            }
+        }
+        return res;
+    }
+
+    private Integer getI(int rowIndex, int num) {
+        if (num == 1 || num == rowIndex) {
+            return 1;
+        } else return getI(rowIndex - 1, num - 1) + getI(rowIndex - 1, num);
+    }
+
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        List<Integer> list = new ArrayList<>();
+        while (head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+        ListNode last = null;
+        for (int i = 0; i < list.size(); i++) {
+            ListNode tem = new ListNode(list.get(i));
+            tem.next = last;
+            last = tem;
+        }
+        return last;
+    }
+
+
+    public ListNode reverseList2(ListNode head) {
+        ListNode l1 = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode tem = new ListNode(curr.val);
+            tem.next = l1;
+            l1 = tem;
+            curr = curr.next;
+        }
+        return l1;
+    }
+
+    public ListNode reverseList3(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode p = reverseList3(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    }
+
+
 }
