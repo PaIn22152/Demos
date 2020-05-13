@@ -1,6 +1,8 @@
 package com.perdev.giflib.jnipackage;
 
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.HandlerThread;
 
 /**
  * Project    demos-git
@@ -12,8 +14,49 @@ import android.graphics.Bitmap;
 public class GifLoader {
 
     static {
-        System.loadLibrary("GifLibHandler");
+        System.loadLibrary("GifLoaderLib");
     }
+
+
+
+    static Handler mHandler;
+
+    //native层GifFileType（giflib里面的）的地址
+    private long nativeGifFile;
+
+    public long getNativeGifFile() {
+        return nativeGifFile;
+    }
+
+    private GifLoader(long nativeGifFile) {
+        this.nativeGifFile = nativeGifFile;
+
+        HandlerThread mHandlerThread = new HandlerThread("GifHandlerThread");
+        mHandlerThread.start();
+        mHandler = new Handler(mHandlerThread.getLooper());
+    }
+
+    public static GifLoader load(String path) {
+        //先加载gif文件，获取native 层GifFile 的地址
+        long nativeGifFile = loadGif(path);
+        GifLoader gifHandler = new GifLoader(nativeGifFile);
+        return gifHandler;
+
+    }
+
+
+    public static void updateBitmap_pub(final long nativeGifFile, final Bitmap bitmap, final Runnable runnable){
+        //在子线程更新Bitmap数据
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                updateBitmap(nativeGifFile,bitmap,runnable);
+            }
+        });
+
+    }
+
+
 
     public static native void blackWhite(Bitmap input, Bitmap output);//黑白滤镜
 
