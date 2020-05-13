@@ -39,6 +39,7 @@ public class GifLoader {
     public static GifLoader load(String path) {
         //先加载gif文件，获取native 层GifFile 的地址
         long nativeGifFile = loadGif(path);
+
         GifLoader gifHandler = new GifLoader(nativeGifFile);
         return gifHandler;
 
