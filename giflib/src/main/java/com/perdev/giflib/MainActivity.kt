@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.perdev.giflib.jnipackage.GifLoader
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.droidsonroids.gif.GifDrawable
 import java.io.File
 
 
@@ -47,7 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         tv_click.setOnClickListener {
 
-            loadBitmap()
+//            loadBitmap()
+
+            val gifDrawable = GifDrawable(resources, R.mipmap.yexiu)
+//            giv_am_gif
+//            gifDrawable.
         }
     }
 

@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.perdev.demos.giflib"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -46,5 +46,7 @@ dependencies {
     //自己封装的常用Utils
     implementation project(path: ':utilslib')
 
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
 }
