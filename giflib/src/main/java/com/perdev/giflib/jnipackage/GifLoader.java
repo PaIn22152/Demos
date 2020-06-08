@@ -20,6 +20,7 @@ public class GifLoader {
 
 
     static Handler mHandler;
+    public static GifLoader instance;
 
     //native层GifFileType（giflib里面的）的地址
     private long nativeGifFile;

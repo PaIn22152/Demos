@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_-JyRgSB-Eeq-vanaRiX2Sw" elementId="org.xmind.cathy.application" contributorURI="platform:/plugin/org.xmind.cathy" selectedElement="_-JyRgiB-Eeq-vanaRiX2Sw" bindingContexts="_-JyRqCB-Eeq-vanaRiX2Sw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList/>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.xmind.ui.MindMapEditorInputFactory&quot; id=&quot;org.xmind.ui.MindMapEditor&quot; name=&quot;Android&#x77e5;&#x8bc6;&#x70b9;&#x68b3;&#x7406;&quot; tooltip=&quot;D:\as\work-space\AA-git-projects\demos-git\xmind\Android&#x77e5;&#x8bc6;&#x70b9;&#x68b3;&#x7406;.xmind&quot;>&#xD;&#xA;&lt;persistable uri=&quot;file:/D:/as/work-space/AA-git-projects/demos-git/xmind/Android&#x77e5;&#x8bc6;&#x70b9;&#x68b3;&#x7406;.xmind&quot;>&#xD;&#xA;&lt;state/>&#xD;&#xA;&lt;/persistable>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_-JyRgiB-Eeq-vanaRiX2Sw" elementId="org.xmind.cathy.window.main" contributorURI="platform:/plugin/org.xmind.cathy" selectedElement="_-oltYCB-Eeq-vanaRiX2Sw" label="XMind" x="0" y="0" width="1024" height="768">
@@ -22,6 +22,7 @@
               <tags>active</tags>
               <children xsi:type="basic:Part" xmi:id="_qL4QoDHtEeqyKeecoh4ltQ" elementId="org.xmind.ui.modelPart.notes" contributorURI="platform:/plugin/org.xmind.ui.mindmap" toBeRendered="false" visible="false" contributionURI="bundleclass://org.xmind.ui.mindmap/org.xmind.ui.internal.e4models.NotesPart" label="%part.notes.label" tooltip="%part.notes.tooltip">
                 <tags>active</tags>
+                <tags>activeOnClose</tags>
               </children>
             </children>
           </children>
@@ -407,11 +408,11 @@
   </descriptors>
   <descriptors xmi:id="_W8IhYETZEeaGL5Gu2uBiyA" elementId="org.xmind.ui.modelPart.image" contributorURI="platform:/plugin/org.xmind.ui.mindmap" label="%part.image.label" tooltip="%part.image.tooltip" closeable="true" contributionURI="bundleclass://org.xmind.ui.mindmap/org.xmind.ui.internal.e4models.ImagePart">
     <persistedState key="modelPart.pages.contributionUri" value="bundleclass://org.xmind.ui.gallery/org.xmind.ui.internal.gallery.ClipArtModelPage,bundleclass://org.xmind.ui.iconfinder/org.xmind.ui.internal.iconfinder.IconfinderModelPage"/>
-    <menus xmi:id="_LmGkQZjyEeqiYKEHsCFlZQ" elementId="org.xmind.ui.modelPart.image.menus.clipArt">
+    <menus xmi:id="_ktePYaR5EeqLoIWx8q7LxA" elementId="org.xmind.ui.modelPart.image.menus.clipArt">
       <tags>ViewMenu</tags>
       <tags>org.xmind.ui.modelPart.image.pages.clipArt</tags>
     </menus>
-    <menus xmi:id="_LmbUYJjyEeqiYKEHsCFlZQ" elementId="org.xmind.ui.modelPart.image.menus.iconfinder">
+    <menus xmi:id="_kttf8KR5EeqLoIWx8q7LxA" elementId="org.xmind.ui.modelPart.image.menus.iconfinder">
       <tags>ViewMenu</tags>
       <tags>org.xmind.ui.modelPart.image.pages.iconfinder</tags>
     </menus>
