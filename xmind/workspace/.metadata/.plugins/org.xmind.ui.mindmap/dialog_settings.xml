@@ -2,8 +2,8 @@
 <section name="Workbench">
 	<section name="org.xmind.ui.popupDialog">
 		<item value="226" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_HEIGHT"/>
-		<item value="427" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_Y_ORIGIN"/>
-		<item value="1196" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_X_ORIGIN"/>
+		<item value="285" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_Y_ORIGIN"/>
+		<item value="406" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_X_ORIGIN"/>
 		<item value="414" key="org.xmind.ui.internal.notes.NotesPopupDIALOG_WIDTH"/>
 	</section>
 	<section name="org.xmind.ui.HyperlinkDialog">

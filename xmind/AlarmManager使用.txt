@@ -1,0 +1,36 @@
+ AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 1);
+
+
+        Intent intent = new Intent(context,AlarmReceiver.class);
+        intent.setAction(AlarmReceiver.ALARM_ACTION);
+
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+        // 到了 21点14分00秒 后通过PendingIntent pi对象发送广播
+        long t = calendar.getTimeInMillis();
+        L.d(" createAlarm t = " + Convertor.timeFormat2(t));
+
+		
+		//设置一次性闹钟，在android10设备，使用RTC_WAKEUP和ELAPSED_REALTIME_WAKEUP无效
+        am.set(AlarmManager.RTC, calendar.getTimeInMillis(), pi);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
+        am.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 20 * 1000, pi);
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 20 * 1000, pi);
+		
+		
+		
+		RTC_WAKEUP: 使用System.currentTimeMillis(),能够唤醒设备
+RTC: 使用Systent.currentTimeMillis(),不能够唤醒设备
+ELAPSED_REALTIME:使用系统启动的时间，不能够唤醒设备。设备唤醒后发送出去
+ELAPSED_REALTIME_WAKEUP:使用系统启动时间，能够唤醒设备。
+
+
+Android 6.0 为了性能优化修改 AlarmManager 的定时API
+使用  am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + delay, pi);
+可以解决高版本不能wakeup的问题
+
+
+使用intent传递数据时，传serializable和parcelable拿不到数据，可以把class数据转成string或者byte数组传递，再转回class数据

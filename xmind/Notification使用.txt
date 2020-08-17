@@ -1,0 +1,172 @@
+package com.afpackage.utils;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.widget.RemoteViews;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
+/**
+ * Project    FemaleFitness7.0
+ * Path       com.afpackage.utils
+ * Date       2020/06/30 - 17:42
+ * Author     Payne.
+ * About      类描述：
+ need permission  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+ */
+public class NotifyShowUtil {
+
+    static NotificationManager notificationManager;
+    static NotificationManagerCompat mCompat;
+
+
+    /**
+     * 播放系统默认提示音
+     *
+     * @return MediaPlayer对象
+     *
+     * @throws Exception
+     */
+    public static void defaultMediaPlayer(Context context)  {
+
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(context, notification);
+            r.play();
+        }catch ( Exception e){
+
+        }
+    }
+
+
+//    public static void show2Update(Context context,String from){
+//
+//
+//        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+//                R.layout.notify_update);
+//        Intent intent = new Intent(context, MainActivity_c4balabala.class);
+//        intent.putExtra("notify", true);
+//        intent.putExtra("from", from);
+//        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+//        String format1 = format.format(new Date());
+//        remoteViews.setTextViewText(R.id.tv_nu_time, format1);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 10,
+//                intent, FLAG_UPDATE_CURRENT);
+//
+//        NotifyShowUtil.show(377, context, true, remoteViews, pendingIntent);
+//
+//
+//
+//    }
+
+    public static void show(int id, Context mContext, boolean remove, RemoteViews remoteViews,String title,String content,
+                            PendingIntent pendingIntent,int smallIcon) {
+
+        notificationManager =
+                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mCompat = NotificationManagerCompat.from(mContext);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // The id of the channel.
+            String cid = "channelId_" + id;
+            // The user-visible name of the channel.
+            CharSequence name = cid + "000";
+            // The user-visible description of the channel.
+            String description = cid + "111";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel mChannel = new NotificationChannel(cid, name, importance);
+            // Configure the notification channel.
+
+//            mChannel.setDescription(description);
+
+            mChannel.enableLights(false);
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+//            mChannel.setLightColor(Color.RED);
+//            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setVibrationPattern(new long[]{0L});
+            mChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "channelId_" + id);
+        // 将Ongoing设为true 那么notification将不能滑动删除
+
+        builder.setOngoing(!remove);
+//        builder.setWhen(System.currentTimeMillis());
+//        builder.setDefaults(NotificationCompat.FLAG_ONLY_ALERT_ONCE);
+        builder.setVibrate(new long[]{0});
+//        builder.setVibrate(new long[]{1,300});
+
+
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        builder.setSound(sound);
+        builder.setSound(null);
+        //从Android4.1开始，可以通过以下方法，设置notification的优先级，
+        // 优先级越高的，通知排的越靠前，优先级低的，不会在手机最顶部的状态栏显示图标  
+//        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setContentTitle(title); // 创建通知的标题
+        builder.setContentText(content); // 创建通知的内容
+        builder.setSmallIcon(smallIcon); // 创建通知的小图标
+        builder.setOnlyAlertOnce(true);
+        builder.setCategory(NotificationCompat.CATEGORY_ALARM);
+        builder.setFullScreenIntent(pendingIntent,true);//android 10
+
+        if (pendingIntent != null) {
+            builder.setContentIntent(pendingIntent);
+            builder.setAutoCancel(true);
+        }
+
+//        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));// 创建通知的大图标
+
+        if (remoteViews != null) {
+            builder.setContent(remoteViews); // 通过设置RemoteViews对象来设置通知的布局，这里我们设置为自定义布局
+        }
+//        builder.setContent(remoteViews); // 通过设置RemoteViews对象来设置通知的布局，这里我们设置为自定义布局
+
+        /*
+         * 是使用自定义视图还是系统提供的视图，上面4的属性一定要设置，不然这个通知显示不出来
+         */
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel channel = new NotificationChannel("to-do", "待办消息",
+//                    NotificationManager.IMPORTANCE_HIGH);
+//            channel.enableLights(false);
+//            channel.enableVibration(false);
+//            channel.setVibrationPattern(new long[]{0});
+//            channel.setSound(null, null);
+//            notificationManager.createNotificationChannel(channel);
+//            builder.setChannelId("to-do");
+//        }
+
+        Notification notification = builder.build(); // 创建通知（每个通知必须要调用这个方法来创建）
+//        notificationManager.post(id, notification); // 发送通知
+
+//        mCompat.cancel(id);
+        mCompat.notify(id, notification);
+
+
+        defaultMediaPlayer(mContext);
+
+        L.d("  NotifyShowUtil  show ");
+
+//        mCompat.cancel(id);
+    }
+
+
+}
