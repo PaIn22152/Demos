@@ -15,14 +15,11 @@
     <children xsi:type="basic:PartSashContainer" xmi:id="_-oltYCB-Eeq-vanaRiX2Sw" selectedElement="_-oltYSB-Eeq-vanaRiX2Sw" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_-oltYSB-Eeq-vanaRiX2Sw" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_-qxesCB-Eeq-vanaRiX2Sw">
         <children xsi:type="advanced:Perspective" xmi:id="_-qxesCB-Eeq-vanaRiX2Sw" elementId="org.xmind.ui.perspective.mindmapping" selectedElement="_-qyFwCB-Eeq-vanaRiX2Sw" label="&#x65b0;&#x5efa;&#x601d;&#x7ef4;&#x56fe;" iconURI="platform:/plugin/org.xmind.ui/icons/xmind.16.png">
-          <children xsi:type="basic:PartSashContainer" xmi:id="_-qyFwCB-Eeq-vanaRiX2Sw" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_-qyFwCB-Eeq-vanaRiX2Sw" selectedElement="_-qyFwSB-Eeq-vanaRiX2Sw" horizontal="true">
             <children xsi:type="advanced:Placeholder" xmi:id="_-qyFwSB-Eeq-vanaRiX2Sw" elementId="org.eclipse.ui.editorss" containerData="10000" ref="_-qwQkCB-Eeq-vanaRiX2Sw"/>
             <children xsi:type="basic:PartStack" xmi:id="_-qyFwiB-Eeq-vanaRiX2Sw" elementId="org.xmind.ui.stack.right" toBeRendered="false" visible="false" containerData="0">
               <tags>XStack</tags>
-              <tags>active</tags>
-              <children xsi:type="basic:Part" xmi:id="_qL4QoDHtEeqyKeecoh4ltQ" elementId="org.xmind.ui.modelPart.notes" contributorURI="platform:/plugin/org.xmind.ui.mindmap" toBeRendered="false" visible="false" contributionURI="bundleclass://org.xmind.ui.mindmap/org.xmind.ui.internal.e4models.NotesPart" label="%part.notes.label" tooltip="%part.notes.tooltip">
-                <tags>active</tags>
-              </children>
+              <children xsi:type="basic:Part" xmi:id="_qL4QoDHtEeqyKeecoh4ltQ" elementId="org.xmind.ui.modelPart.notes" contributorURI="platform:/plugin/org.xmind.ui.mindmap" toBeRendered="false" visible="false" contributionURI="bundleclass://org.xmind.ui.mindmap/org.xmind.ui.internal.e4models.NotesPart" label="%part.notes.label" tooltip="%part.notes.tooltip"/>
             </children>
           </children>
         </children>
@@ -49,6 +46,7 @@
       <children xsi:type="basic:PartStack" xmi:id="_-qwQkSB-Eeq-vanaRiX2Sw" elementId="org.eclipse.e4.primaryDataStack" containerData="10000">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
+        <tags>active</tags>
       </children>
     </sharedElements>
     <trimBars xmi:id="_-JyRgyB-Eeq-vanaRiX2Sw" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.xmind.cathy">
@@ -407,11 +405,11 @@
   </descriptors>
   <descriptors xmi:id="_W8IhYETZEeaGL5Gu2uBiyA" elementId="org.xmind.ui.modelPart.image" contributorURI="platform:/plugin/org.xmind.ui.mindmap" label="%part.image.label" tooltip="%part.image.tooltip" closeable="true" contributionURI="bundleclass://org.xmind.ui.mindmap/org.xmind.ui.internal.e4models.ImagePart">
     <persistedState key="modelPart.pages.contributionUri" value="bundleclass://org.xmind.ui.gallery/org.xmind.ui.internal.gallery.ClipArtModelPage,bundleclass://org.xmind.ui.iconfinder/org.xmind.ui.internal.iconfinder.IconfinderModelPage"/>
-    <menus xmi:id="_kt420eEZEeqB8JqmOuOe0A" elementId="org.xmind.ui.modelPart.image.menus.clipArt">
+    <menus xmi:id="_xpkSIHvwEeuXKr-JTmPtOQ" elementId="org.xmind.ui.modelPart.image.menus.clipArt">
       <tags>ViewMenu</tags>
       <tags>org.xmind.ui.modelPart.image.pages.clipArt</tags>
     </menus>
-    <menus xmi:id="_kuM_4OEZEeqB8JqmOuOe0A" elementId="org.xmind.ui.modelPart.image.menus.iconfinder">
+    <menus xmi:id="_xrzGwHvwEeuXKr-JTmPtOQ" elementId="org.xmind.ui.modelPart.image.menus.iconfinder">
       <tags>ViewMenu</tags>
       <tags>org.xmind.ui.modelPart.image.pages.iconfinder</tags>
     </menus>
