@@ -1,5 +1,10 @@
 package com.perdev.designpattern.factory;
 
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Project    demos-git
  * Path       com.perdev.designpattern.factory
@@ -11,7 +16,12 @@ public class ShapeFactory {
     public static final int SHAPE_CIRCLE = 0;
     public static final int SHAPE_SQUARE = 1;
 
-    public static Shape getShape(int shapeType) {
+    @IntDef(value = {SHAPE_CIRCLE, SHAPE_SQUARE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface ShapeType {
+    }
+
+    public static Shape getShape(@ShapeType int shapeType) {
         if (SHAPE_CIRCLE == shapeType) {
             return new Circle();
         } else if (SHAPE_SQUARE == shapeType) {
