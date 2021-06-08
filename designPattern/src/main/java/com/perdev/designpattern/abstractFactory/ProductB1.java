@@ -5,7 +5,7 @@ package com.perdev.designpattern.abstractFactory;
  * Path       com.perdev.designpattern.abstractFactory
  * Date       2021/06/04 - 16:51
  * Author     Payne.
- * About      类描述：
+ * About      类描述：产品B实现1
  */
 public class ProductB1 implements AbstractProductB {
     @Override

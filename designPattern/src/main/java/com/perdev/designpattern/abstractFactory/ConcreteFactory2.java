@@ -5,7 +5,7 @@ package com.perdev.designpattern.abstractFactory;
  * Path       com.perdev.designpattern.abstractFactory
  * Date       2021/06/04 - 16:58
  * Author     Payne.
- * About      类描述：
+ * About      类描述：工厂实现2
  */
 public class ConcreteFactory2 extends AbstractFactory {
     @Override

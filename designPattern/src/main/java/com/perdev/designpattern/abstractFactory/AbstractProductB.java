@@ -5,8 +5,8 @@ package com.perdev.designpattern.abstractFactory;
  * Path       com.perdev.designpattern.abstractFactory
  * Date       2021/06/04 - 16:14
  * Author     Payne.
- * About      类描述：
+ * About      类描述：抽象产品B
  */
-interface AbstractProductB {
+public interface AbstractProductB {
     void doSomething();
 }

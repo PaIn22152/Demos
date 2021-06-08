@@ -20,6 +20,8 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.factory.Main.main()
 
-        com.perdev.designpattern.abstractFactory.Main.main()
+//        com.perdev.designpattern.abstractFactory.Main.main()
+
+        com.perdev.designpattern.builder.Main.main()
     }
 }
