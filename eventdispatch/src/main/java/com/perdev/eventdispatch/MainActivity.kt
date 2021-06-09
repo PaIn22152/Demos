@@ -1,8 +1,8 @@
 package com.perdev.eventdispatch
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.MotionEvent
 import com.perdev.utilslib.d
 import kotlinx.android.synthetic.main.activity_main.*

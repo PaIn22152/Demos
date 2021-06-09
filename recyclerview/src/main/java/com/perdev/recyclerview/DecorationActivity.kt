@@ -3,12 +3,12 @@ package com.perdev.recyclerview
 import android.content.Context
 import android.graphics.*
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.*
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.*
 import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
@@ -86,7 +86,8 @@ class DecorationActivity : AppCompatActivity() {
 
 
         //test 5
-        rv_ad.layoutManager = GridLayoutManager(this, 3)
+        rv_ad.layoutManager =
+            androidx.recyclerview.widget.GridLayoutManager(this, 3)
         rv_ad.addItemDecoration(GridDecoration(this, 3))
     }
 
@@ -107,7 +108,7 @@ class DecorationActivity : AppCompatActivity() {
             paint.color = Color.BLACK
         }
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
             val totalCount = state.itemCount
             val pos = parent.childCount - 1
@@ -139,7 +140,7 @@ class DecorationActivity : AppCompatActivity() {
             return pos + num < total
         }
 
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
             val childCount = parent.childCount
             val totalCount = state.itemCount
 
@@ -186,7 +187,7 @@ class DecorationActivity : AppCompatActivity() {
             paint.color = Color.parseColor("#557799")
         }
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
             val pos = parent.getChildAdapterPosition(view)
             if (isGroupFirst(pos)) {
@@ -195,7 +196,7 @@ class DecorationActivity : AppCompatActivity() {
         }
 
 
-        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
             super.onDrawOver(c, parent, state)
             val itemCount = state.itemCount
             val childCount = parent.childCount
@@ -271,7 +272,7 @@ class DecorationActivity : AppCompatActivity() {
             paint.color = Color.parseColor("#557799")
         }
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: State) {
             super.getItemOffsets(outRect, view, parent, state)
             val pos = parent.getChildAdapterPosition(view)
             if (isGroupFirst(pos)) {
@@ -279,7 +280,7 @@ class DecorationActivity : AppCompatActivity() {
             }
         }
 
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: State) {
+        override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: State) {
             super.onDraw(c, parent, state)
             val left = parent.paddingLeft.toFloat()
             val right = parent.width - parent.paddingRight.toFloat()
@@ -329,7 +330,7 @@ class DecorationActivity : AppCompatActivity() {
             rightPaint.color = mContext.resources.getColor(R.color.colorPrimary)
         }
 
-        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: State) {
+        override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: State) {
             super.onDrawOver(c, parent, state)
             for (i in 0 until parent.childCount) {
                 val child: View = parent.getChildAt(i)
@@ -369,7 +370,7 @@ class DecorationActivity : AppCompatActivity() {
             dividerPaint.color = mColor
         }
 
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
             //除最后一个item外，其余item都在底部设置分割线
             if (state.itemCount != parent.childCount) {
@@ -383,7 +384,7 @@ class DecorationActivity : AppCompatActivity() {
 
         }
 
-        override fun onDraw(c: Canvas, parent: RecyclerView, state: State) {
+        override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: State) {
             val childCount = parent.childCount
             if (orientation == VERTICAL) {
                 val left = (parent.paddingLeft + mMargin1).toFloat()

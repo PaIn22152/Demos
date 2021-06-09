@@ -2,10 +2,10 @@ package com.perdev.recyclerview
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,8 +44,13 @@ class SimpleUse1Activity : AppCompatActivity() {
 
 //        rv_asu1.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
-        val gridLayoutManager = GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+        val gridLayoutManager = androidx.recyclerview.widget.GridLayoutManager(
+            this,
+            3,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
+        gridLayoutManager.spanSizeLookup = object : androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 //当itemType为GENDER_FEMALE时，一个item占用三个位置
                 if (adapter.getItemViewType(position) == Simple1Adapter1.GENDER_FEMALE) {
@@ -56,7 +61,11 @@ class SimpleUse1Activity : AppCompatActivity() {
         }
         rv_asu1.layoutManager = gridLayoutManager
 
-        rv_asu1.layoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
+        rv_asu1.layoutManager =
+            androidx.recyclerview.widget.StaggeredGridLayoutManager(
+                3,
+                androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            )
 
 
     }

@@ -1,7 +1,7 @@
 package com.perdev.recyclerview.test
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import kotlin.math.pow
 
@@ -12,12 +12,12 @@ import kotlin.math.pow
  * Author     Payne.
  * About      类描述：
  */
-class TestAdapter(mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TestAdapter(mContext: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         TODO("通过位置position，返回相应的viewType")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         TODO("根据不同的viewType，创建相应的viewHolder")
     }
 
@@ -25,7 +25,7 @@ class TestAdapter(mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHol
         TODO("返回item的数量")
     }
 
-    override fun onBindViewHolder(viewholer: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewholer: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         TODO("使用viewHolder对象，和相应的位置position，绑定数据到itemView")
     }
 

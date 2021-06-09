@@ -1,8 +1,8 @@
 package com.perdev.recyclerview.base
 
 import android.content.Context
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +22,7 @@ const val TYPE_LOADING_VIEW = 0x1000
 
 abstract class BaseRecyclerViewAdapter2<D, VH : BaseViewHolder>(
         val mContext: Context, @LayoutRes val mLayoutId: Int, val mData: List<D>)
-    : RecyclerView.Adapter<VH>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
 
     private var mHeaderLayout: LinearLayout? = null
     private var mFooterLayout: LinearLayout? = null
@@ -147,11 +147,11 @@ abstract class BaseRecyclerViewAdapter2<D, VH : BaseViewHolder>(
             mHeaderLayout = LinearLayout(mContext)
             if (orientation == LinearLayout.VERTICAL) {
                 mHeaderLayout!!.orientation = LinearLayout.VERTICAL
-                mHeaderLayout!!.layoutParams = RecyclerView.LayoutParams(
+                mHeaderLayout!!.layoutParams = androidx.recyclerview.widget.RecyclerView.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             } else {
                 mHeaderLayout!!.orientation = LinearLayout.HORIZONTAL
-                mHeaderLayout!!.layoutParams = RecyclerView.LayoutParams(
+                mHeaderLayout!!.layoutParams = androidx.recyclerview.widget.RecyclerView.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
             }
         }

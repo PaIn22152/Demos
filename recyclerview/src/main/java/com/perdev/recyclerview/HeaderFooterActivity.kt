@@ -2,9 +2,9 @@ package com.perdev.recyclerview
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import com.perdev.recyclerview.base.BaseRecyclerViewAdapter2
 import com.perdev.recyclerview.base.BaseViewHolder
@@ -28,7 +28,8 @@ class HeaderFooterActivity : AppCompatActivity() {
         adapter.addHeaderView(header)
         rv_ahf.adapter = adapter
 
-        rv_ahf.layoutManager = LinearLayoutManager(this)
+        rv_ahf.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(this)
     }
 
     class HeaderAdapter(

@@ -4,8 +4,8 @@ package com.perdev.recyclerview
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import android.text.TextPaint
 import android.text.TextUtils
 import android.view.View
@@ -33,7 +33,7 @@ class PinnedSectionDecorationOld(context: Context, decorationCallback: Decoratio
         fun getGroupFirstLine(position: Int): String
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         val pos = parent.getChildAdapterPosition(view)
         val groupId = callback.getGroupId(pos)
@@ -51,7 +51,7 @@ class PinnedSectionDecorationOld(context: Context, decorationCallback: Decoratio
         d("67gnd",s)
     }
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         val itemCount = state.itemCount
         val childCount = parent.childCount

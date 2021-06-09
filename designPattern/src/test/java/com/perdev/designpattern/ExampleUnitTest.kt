@@ -22,6 +22,8 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.abstractFactory.Main.main()
 
-        com.perdev.designpattern.builder.Main.main()
+//        com.perdev.designpattern.builder.Main.main()
+
+        com.perdev.designpattern.prototype.Main.main()
     }
 }

@@ -1,6 +1,6 @@
 package com.perdev.recyclerview.base
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 
 /**
@@ -10,7 +10,7 @@ import android.view.ViewGroup
  * Author     Payne.
  * About      类描述：
  */
-abstract class BaseRecyclerViewAdapter1 : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRecyclerViewAdapter1 : androidx.recyclerview.widget.RecyclerView.Adapter<BaseViewHolder>() {
 
     private var mItemClickListener: OnItemClickListener? = null
     private var mItemLongClickListener: OnItemLongClickListener? = null

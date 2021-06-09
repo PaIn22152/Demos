@@ -1,6 +1,6 @@
 package com.perdev.recyclerview.base
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 
@@ -11,7 +11,7 @@ import android.widget.TextView
  * Author     Payne.
  * About      类描述：
  */
-open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+open class BaseViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     fun <T : View> findViewById(id: Int): T? {
         return itemView.findViewById(id)
     }
