@@ -1,5 +1,6 @@
 package com.perdev.designpattern
 
+
 import org.junit.Test
 
 /**
@@ -21,6 +22,9 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.creational.builder.Main.main()
 
-        com.perdev.designpattern.creational.prototype.Main.main()
+//        com.perdev.designpattern.creational.prototype.Main.main()
+
+        com.perdev.designpattern.structural.bridge.Main.main()
+
     }
 }
