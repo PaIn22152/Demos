@@ -1,9 +1,6 @@
 package com.perdev.designpattern
 
-import com.perdev.designpattern.singleton.Main
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -18,12 +15,12 @@ class ExampleUnitTest {
 //        Main.main()
         
 
-//        com.perdev.designpattern.factory.Main.main()
+//        com.perdev.designpattern.creational.factory.Main.main()
 
-//        com.perdev.designpattern.abstractFactory.Main.main()
+//        com.perdev.designpattern.creational.abstractFactory.Main.main()
 
-//        com.perdev.designpattern.builder.Main.main()
+//        com.perdev.designpattern.creational.builder.Main.main()
 
-        com.perdev.designpattern.prototype.Main.main()
+        com.perdev.designpattern.creational.prototype.Main.main()
     }
 }
