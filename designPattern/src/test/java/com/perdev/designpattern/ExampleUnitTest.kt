@@ -28,7 +28,9 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.structural.decorator.Main.main()
 
-        com.perdev.designpattern.structural.facade.Main.main()
+//        com.perdev.designpattern.structural.facade.Main.main()
+
+        com.perdev.designpattern.structural.flyweight.Main.main()
 
     }
 }
