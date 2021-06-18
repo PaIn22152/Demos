@@ -24,7 +24,11 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.creational.prototype.Main.main()
 
-        com.perdev.designpattern.structural.bridge.Main.main()
+//        com.perdev.designpattern.structural.bridge.Main.main()
+
+//        com.perdev.designpattern.structural.decorator.Main.main()
+
+        com.perdev.designpattern.structural.facade.Main.main()
 
     }
 }

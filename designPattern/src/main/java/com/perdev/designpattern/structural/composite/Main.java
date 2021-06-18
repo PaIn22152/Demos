@@ -1,5 +1,8 @@
 package com.perdev.designpattern.structural.composite;
 
+import android.view.View;
+import android.view.ViewGroup;
+
 /**
  * Project    demos-git
  * Path       com.perdev.designpattern.structural.composite
@@ -20,5 +23,9 @@ public class Main {
         listNode.left = new ListNode(2);
 
         listNode.right = new ListNode(3);
+
+
+        ViewGroup viewGroup;
+        View view;
     }
 }
