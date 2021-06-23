@@ -1,5 +1,7 @@
 package com.perdev.designpattern.structural.flyweight;
 
+import android.os.Message;
+
 /**
  * Project    demos-git
  * Path       com.perdev.designpattern.structural.flyweight
@@ -19,5 +21,12 @@ public class Main {
 
         IBike bike3 = factory.getBike("ofo");
         bike3.billing(2);
+
+
+//        String s1 = "abc";
+//        String s2 = "abc";
+//        System.out.println("s1==s2 : " + (s1 == s2));//true
+//
+//        Message.obtain();
     }
 }

@@ -30,7 +30,9 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.structural.facade.Main.main()
 
-        com.perdev.designpattern.structural.flyweight.Main.main()
+//        com.perdev.designpattern.structural.flyweight.Main.main()
+
+        com.perdev.designpattern.structural.proxy.Main.main()
 
     }
 }
