@@ -32,7 +32,14 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.structural.flyweight.Main.main()
 
-        com.perdev.designpattern.structural.proxy.Main.main()
+//        com.perdev.designpattern.structural.proxy.Main.main()
+
+
+//        com.perdev.designpattern.behavioral.chain.Main.main()
+
+//        com.perdev.designpattern.behavioral.command.Main.main()
+
+        com.perdev.designpattern.behavioral.expression.Main.main()
 
     }
 }
