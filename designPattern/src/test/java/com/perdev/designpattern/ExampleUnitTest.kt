@@ -39,7 +39,9 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.behavioral.command.Main.main()
 
-        com.perdev.designpattern.behavioral.expression.Main.main()
+//        com.perdev.designpattern.behavioral.expression.Main.main()
+
+        com.perdev.designpattern.behavioral.iterator.Main.main()
 
     }
 }
