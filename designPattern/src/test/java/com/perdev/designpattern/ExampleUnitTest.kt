@@ -41,7 +41,9 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.behavioral.expression.Main.main()
 
-        com.perdev.designpattern.behavioral.iterator.Main.main()
+//        com.perdev.designpattern.behavioral.iterator.Main.main()
+
+        com.perdev.designpattern.behavioral.mediator.Main.main()
 
     }
 }
