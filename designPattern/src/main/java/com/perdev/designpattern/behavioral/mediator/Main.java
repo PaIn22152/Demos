@@ -25,7 +25,6 @@ public class Main {
         jack.send("求租一个单间");
 
 
-        KeyguardManager
 
     }
 }
