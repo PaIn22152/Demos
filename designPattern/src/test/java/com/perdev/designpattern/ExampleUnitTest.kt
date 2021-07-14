@@ -47,7 +47,11 @@ class ExampleUnitTest {
 
 //        com.perdev.designpattern.behavioral.memento.Main.main()
 
-        com.perdev.designpattern.behavioral.observer.Main.main()
+//        com.perdev.designpattern.behavioral.observer.Main.main()
+
+//        com.perdev.designpattern.behavioral.state.Main.main()
+
+        com.perdev.designpattern.behavioral.strategy.Main.main()
 
     }
 }
